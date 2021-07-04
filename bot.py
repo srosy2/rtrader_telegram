@@ -5,6 +5,10 @@ from prepare import PrepareMessage
 from server import Client
 
 
+with open('security/bot_key.txt') as file:
+    key = file.read()
+
+
 def get_url() -> str:
     contents = requests.get('https://random.dog/woof.json').json()
     image_url = contents['url']
@@ -22,7 +26,7 @@ def bop(update, context):
 
 
 def main():
-    updater = Updater('1747444454:AAEW0elfYpO5OUr0A3aWHw1AeeLEybfRxjM', use_context=True)
+    updater = Updater(key)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler('bop', bop))
     updater.start_polling()
